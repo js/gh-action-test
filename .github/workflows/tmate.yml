@@ -1,0 +1,19 @@
+# Checks out the code and allow SSH connections using tmate for
+# debugging in the Github Actions environment
+# https://til.simonwillison.net/til/til/github-actions_debug-tmate.md
+
+name: Launch tmate session
+
+# Only start when workflow is started manually dispatched
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    env:
+      DEVELOPER_DIR: "/Applications/Xcode_12.app/Contents/Developer"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
